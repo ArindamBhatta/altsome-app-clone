@@ -1,3 +1,4 @@
+import 'package:altsome_app/page/home_page/home_page_body/top_data_in_page_view/Provider/specification_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -41,9 +42,13 @@ class AltsomeApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => initialize(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => SpecificationProvider(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        title: "Altsome",
         theme: ThemeData(
           textTheme: GoogleFonts.poppinsTextTheme(),
         ),

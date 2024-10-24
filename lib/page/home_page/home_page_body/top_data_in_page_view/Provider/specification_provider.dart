@@ -17,4 +17,9 @@ class SpecificationProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  void reset() {
+    storeCardIndex = {};
+    notifyListeners();
+  }
 }

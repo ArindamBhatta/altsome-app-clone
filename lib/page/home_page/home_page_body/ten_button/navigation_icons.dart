@@ -1,4 +1,6 @@
+import 'package:altsome_app/page/home_page/home_page_body/top_data_in_page_view/Provider/specification_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'sectors_page/widgets/sectors_page.dart';
 import 'button_icons.dart';
 
@@ -16,6 +18,11 @@ class _NavigationButtonState extends State<NavigationIcons> {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => SectorsPage()),
+      ).then(
+        (value) {
+          print("reset the specification provider");
+          Provider.of<SpecificationProvider>(context, listen: false).reset();
+        },
       );
     }
   }
