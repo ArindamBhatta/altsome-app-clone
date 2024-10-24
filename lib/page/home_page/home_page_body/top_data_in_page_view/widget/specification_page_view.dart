@@ -19,7 +19,7 @@ class SpecificationPageView extends StatefulWidget {
 }
 
 class _SpecificationPageViewState extends State<SpecificationPageView> {
-  int? visibleBackground = 0;
+  int? visibleOption = 0;
   late Future<ModelTwo?> _dataFuture;
 
   PageController ctrl = PageController();
@@ -40,9 +40,13 @@ class _SpecificationPageViewState extends State<SpecificationPageView> {
     _dataFuture = accessSecondApi();
   }
 
-  void changeTapOrSwipe(int index) {
+  void changeVisibility(int index) {
     setState(() {
-      visibleBackground = (visibleBackground == index) ? null : index;
+      if (visibleOption == index) {
+        visibleOption = null;
+      } else {
+        visibleOption = index;
+      }
     });
   }
 
@@ -67,13 +71,15 @@ class _SpecificationPageViewState extends State<SpecificationPageView> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                strokeWidth: 2.0,
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+              ),
             );
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {
             final data = snapshot.data!; //* data and details both use in api
-            print(data.data?.tt);
             final details = data.data?.details;
             return Container(
               decoration: const BoxDecoration(
@@ -103,6 +109,7 @@ class _SpecificationPageViewState extends State<SpecificationPageView> {
                             index++)
                           NavigationButton(
                             index: index,
+                            flag: visibleOption == index,
                             containerText: navigationButtons[index],
                             onButtonPressed: () {
                               ctrl.animateToPage(
@@ -122,29 +129,34 @@ class _SpecificationPageViewState extends State<SpecificationPageView> {
                   //* PageView
                   ExpandablePageView(
                     onPageChanged: (scrollIndex) {
-                      changeTapOrSwipe(scrollIndex);
+                      changeVisibility(scrollIndex);
                     },
                     controller: ctrl,
                     children: [
                       SpecificationList(
                         items: data.data?.tt,
                         details: details,
+                        cardSpecificKey: 'tt',
                       ),
                       SpecificationList(
                         items: data.data?.tg,
                         details: details,
+                        cardSpecificKey: 'tg',
                       ),
                       SpecificationList(
                         items: data.data?.tr,
                         details: details,
+                        cardSpecificKey: 'tr',
                       ),
                       SpecificationList(
                         items: data.data?.tl,
                         details: details,
+                        cardSpecificKey: 'tl',
                       ),
                       SpecificationList(
                         items: data.data?.rt,
                         details: details,
+                        cardSpecificKey: 'rt',
                       ),
                     ],
                   ),

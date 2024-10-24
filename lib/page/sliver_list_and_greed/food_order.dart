@@ -109,6 +109,9 @@ class FoodOrder extends StatelessWidget {
                               const CircularProgressIndicator(
                             strokeWidth: 2.0,
                             color: Colors.black,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              Colors.green,
+                            ),
                           ),
                           errorWidget: (context, url, error) =>
                               const Icon(Icons.error),

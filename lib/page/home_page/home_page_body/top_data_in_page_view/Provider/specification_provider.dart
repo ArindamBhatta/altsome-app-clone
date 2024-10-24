@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
 
 class SpecificationProvider extends ChangeNotifier {
-  int? unfoldedCardIndex;
-
-  var storeLocalData = {
-    "tt": 0,
-    "tg": 0,
-    "tr": 0,
-    "tl": 0,
-    "rt": 0,
+  Map<String, int?> storeCardIndex = {
+    "tt": null,
+    "tg": null,
+    "tr": null,
+    "tl": null,
+    "rt": null,
   };
 
-  void cardState(int index) {
-    if (unfoldedCardIndex == index) {
-      unfoldedCardIndex = null;
+  void cardState(int index, String cardSpecificKey) {
+    if (storeCardIndex[cardSpecificKey] == index) {
+      storeCardIndex[cardSpecificKey] = null;
     } else {
-      unfoldedCardIndex = index;
-      storeLocalData["tt"] = index;
-      storeLocalData["tg"] = index;
-      storeLocalData["tr"] = index;
-      storeLocalData["tl"] = index;
-      storeLocalData["rt"] = index;
+      storeCardIndex[cardSpecificKey] = index;
     }
     notifyListeners();
   }

@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
 class NavigationButton extends StatelessWidget {
+  final String containerText;
+  final int index;
+  final VoidCallback onButtonPressed;
+  final bool flag;
+
   const NavigationButton({
     super.key,
+    required this.flag,
     required this.index,
     required this.containerText,
     required this.onButtonPressed,
   });
-
-  final String containerText;
-  final int index;
-  final VoidCallback onButtonPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class NavigationButton extends StatelessWidget {
       onPressed: onButtonPressed,
       style: TextButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-        backgroundColor: index == 0 ? Colors.blue : null,
+        backgroundColor: flag ? Colors.blue[800] : null,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
         ),
@@ -28,7 +30,7 @@ class NavigationButton extends StatelessWidget {
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 10,
-          color: index == 0 ? Colors.white : Colors.black,
+          color: flag ? Colors.white : Colors.black,
         ),
       ),
     );

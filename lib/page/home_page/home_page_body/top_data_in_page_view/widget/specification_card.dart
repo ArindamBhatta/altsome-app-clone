@@ -4,9 +4,19 @@ import '../utils/specification_card_extended.dart';
 import '../Provider/specification_provider.dart';
 
 class SpecificationCard extends StatelessWidget {
+  final index;
+  final cardSpecificKey;
+  final String cardNumber;
+  final String name;
+  final String shortName;
+  final conditionalValue;
+  final String totalValue;
+  final currencyShort;
+
   SpecificationCard({
     super.key,
     required this.index,
+    required this.cardSpecificKey,
     required this.cardNumber,
     required this.name,
     required this.shortName,
@@ -15,22 +25,54 @@ class SpecificationCard extends StatelessWidget {
     required this.currencyShort,
   });
 
-  final index;
-  final String cardNumber;
-  final String name;
-  final String shortName;
-  final conditionalValue;
-  final String totalValue;
-  final currencyShort;
-
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
-    print("card width is $width");
-    final int? unfoldedCardIndex = context.select(
-      (SpecificationProvider provider) => provider.unfoldedCardIndex,
+    bool unfold = false;
+
+    final int? unfoldedCardIndexOne = context.select(
+      (SpecificationProvider provider) =>
+          provider.storeCardIndex[cardSpecificKey],
     );
-    bool unfold = index == unfoldedCardIndex;
+
+    final int? unfoldedCardIndexTwo = context.select(
+      (SpecificationProvider provider) =>
+          provider.storeCardIndex[cardSpecificKey],
+    );
+
+    final int? unfoldedCardIndexThree = context.select(
+      (SpecificationProvider provider) =>
+          provider.storeCardIndex[cardSpecificKey],
+    );
+
+    final int? unfoldedCardIndexFour = context.select(
+      (SpecificationProvider provider) =>
+          provider.storeCardIndex[cardSpecificKey],
+    );
+
+    final int? unfoldedCardIndexFive = context.select(
+      (SpecificationProvider provider) =>
+          provider.storeCardIndex[cardSpecificKey],
+    );
+
+    if (unfoldedCardIndexOne == index && "$cardSpecificKey" == "tt") {
+      unfold = true;
+    }
+
+    if (unfoldedCardIndexTwo == index && "$cardSpecificKey" == "tg") {
+      unfold = true;
+    }
+
+    if (unfoldedCardIndexThree == index && "$cardSpecificKey" == "tr") {
+      unfold = true;
+    }
+
+    if (unfoldedCardIndexFour == index && "$cardSpecificKey" == "tl") {
+      unfold = true;
+    }
+
+    if (unfoldedCardIndexFive == index && "$cardSpecificKey" == "rt") {
+      unfold = true;
+    }
 
     String currencyChange() {
       if (currencyShort > 1000000000) {
@@ -74,7 +116,7 @@ class SpecificationCard extends StatelessWidget {
                     ),
                     Icon(
                       Icons.star_border_outlined,
-                      size: 16, // 36
+                      size: 16,
                     ),
                   ],
                 ),
@@ -86,7 +128,7 @@ class SpecificationCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Container(
-                            width: 40.0, // 76
+                            width: 40.0,
                             height: 40.0,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
@@ -102,7 +144,7 @@ class SpecificationCard extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(left: 8.0), //*80
+                            padding: EdgeInsets.only(left: 8.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -122,7 +164,7 @@ class SpecificationCard extends StatelessWidget {
                                       shortName,
                                       style: TextStyle(
                                         color: Colors.grey,
-                                        fontSize: 12.0, //12
+                                        fontSize: 12.0,
                                       ),
                                     ),
                                     Icon(
@@ -152,31 +194,31 @@ class SpecificationCard extends StatelessWidget {
                               Text(
                                 totalValue,
                                 style: TextStyle(
-                                  fontSize: 12.0, //12 + 44 = 56
+                                  fontSize: 12.0,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               Text(
                                 currencyChange(),
                                 style: TextStyle(
-                                  fontSize: 10.0, //10 + 56 = 66
+                                  fontSize: 10.0,
                                   color: Colors.grey,
                                 ),
                               ),
                             ],
                           ),
                           const SizedBox(
-                            width: 10.0, //43
+                            width: 10.0,
                           ),
                           Container(
-                            width: 25, //25 + 8 = 33
+                            width: 25,
                             height: 25,
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: unfold ? Colors.blue[800] : Colors.white,
                               border: Border.all(
                                 color: Colors.black,
-                                width: unfold ? 1.0 : 0.5, //33
+                                width: unfold ? 1.0 : 0.5,
                               ),
                             ),
                             child: TextButton(
@@ -188,7 +230,7 @@ class SpecificationCard extends StatelessWidget {
                                 context
                                     .read<
                                         SpecificationProvider>() //* use provider
-                                    .cardState(index);
+                                    .cardState(index, cardSpecificKey);
                               },
                               child: Center(
                                 child: unfold

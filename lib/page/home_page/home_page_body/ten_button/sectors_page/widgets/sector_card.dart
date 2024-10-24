@@ -18,9 +18,7 @@ class SectorCard extends StatelessWidget {
     required this.loserPercentage,
     required this.dominance,
     super.key,
-  }) {
-    print("SectorCard constructor called $index");
-  }
+  });
 
   final int index;
   final String containerName;
@@ -37,11 +35,9 @@ class SectorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("called before watch $index");
     final int? unfoldedCardIndex =
         context.select((ToggleProvider provider) => provider.unfoldedCardIndex);
     bool unfold = index == unfoldedCardIndex;
-    print("print bool value $unfoldedCardIndex $index ${unfold.toString()}");
 
     return Card(
       elevation: 1.5,
