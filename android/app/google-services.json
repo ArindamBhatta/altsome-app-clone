@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "501963981540",
+    "project_id": "check-db-a09a7",
+    "storage_bucket": "check-db-a09a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:501963981540:android:9b6ad714181f1eb359e2f1",
+        "android_client_info": {
+          "package_name": "com.example.check_database"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6NdGN7YmMuiNsq3E6DySjlAxf4IhLfnw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:501963981540:android:1f64776136e0f5fd59e2f1",
+        "android_client_info": {
+          "package_name": "com.example.second_try_application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6NdGN7YmMuiNsq3E6DySjlAxf4IhLfnw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

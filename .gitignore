@@ -1,0 +1,45 @@
+# Ignore Android, iOS, Web, macOS, and Windows directories
+android/
+ios/
+web/
+macos/
+windows/
+
+# Flutter/Dart/Pub related files
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+build/
+
+# Ignore build artifacts for other platforms
+**/android/app/debug
+**/android/app/profile
+**/android/app/release
+
+# Miscellaneous files to ignore
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+# IntelliJ related files
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Symbolication and Obfuscation related
+app.*.symbols
+app.*.map.json
+
+# Ignore any additional files for temporary work or cache
