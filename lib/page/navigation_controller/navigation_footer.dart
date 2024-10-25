@@ -1,7 +1,6 @@
 import 'package:altsome_app/page/sliver_list_and_greed/food_order.dart';
 import 'package:flutter/material.dart';
 import 'package:altsome_app/page/home_page/home_page.dart';
-import 'package:altsome_app/page/sign_up_sign_in_form/form_data.dart';
 import 'package:altsome_app/page/crud_operation/expense_tracker_main_page.dart';
 import '../upload_picture/picture_page.dart';
 
@@ -71,7 +70,6 @@ class _NavigationFooterState extends State<NavigationFooter> {
         HomePage(),
         ExpenseTrackerMainPage(),
         PicturePage(),
-        FormWithOnSaved(),
         FoodOrder(),
       ][currentPageIndex],
     );

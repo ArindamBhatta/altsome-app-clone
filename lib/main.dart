@@ -1,3 +1,4 @@
+import 'package:altsome_app/page/Authentication/sign_in_form.dart';
 import 'package:altsome_app/page/home_page/home_page_body/top_data_in_page_view/Provider/specification_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,26 +12,37 @@ void main() async {
   try {
     await Firebase.initializeApp();
     runApp(
-      AltsomeApp(),
+      MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: "Altsome",
+        theme: ThemeData(
+          textTheme: GoogleFonts.poppinsTextTheme(),
+        ),
+        home: SignInForm(),
+      ),
     );
   } catch (error) {
     runApp(MaterialApp(
-      home: Center(
-        child: Column(
-          children: [
-            SnackBar(
-              content: Text(
-                "Firebase connection failed",
+      debugShowCheckedModeBanner: false,
+      title: "Altsome",
+      theme: ThemeData(
+        textTheme: GoogleFonts.poppinsTextTheme(),
+      ),
+      home: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SnackBar(
+                content: Text("Firebase connection failed"),
               ),
-            ),
-            AltsomeApp(),
-          ],
+              SignInForm(),
+            ],
+          ),
         ),
       ),
     ));
-    print(
-      "Error in firebase initialization: $error",
-    );
+    print("Error in firebase initialization: $error");
   }
 }
 

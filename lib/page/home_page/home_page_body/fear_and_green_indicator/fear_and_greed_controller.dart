@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:altsome_app/page/home_page/home_page_body/fear_and_green_indicator/heading_and_download_button.dart';
 import 'package:altsome_app/page/home_page/home_page_body/fear_and_green_indicator/static_image_indicator.dart';
@@ -16,6 +18,8 @@ class FearAndGreedIndex extends StatefulWidget {
 
 class _FearAndGreedIndexState extends State<FearAndGreedIndex> {
   late Future<ModelOne?> _dataFuture;
+  double _progressValue = 0.0;
+  Timer? _timer;
 
   Color getColorFromCode(String colorCode) {
     switch (colorCode) {
@@ -30,10 +34,28 @@ class _FearAndGreedIndexState extends State<FearAndGreedIndex> {
     }
   }
 
+  void _startFakeLoadingAnimation() {
+    _timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
+      setState(() {
+        _progressValue += 0.1;
+        if (_progressValue >= 1.0) {
+          _progressValue = 0.0; // Reset progress for continuous animation
+        }
+      });
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _dataFuture = Repo.accessFirstApi();
+    _startFakeLoadingAnimation();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
   }
 
   @override
@@ -63,10 +85,10 @@ class _FearAndGreedIndexState extends State<FearAndGreedIndex> {
                             ConnectionState.waiting) {
                           return Container(
                             alignment: Alignment.center,
-                            height: 100.0,
+                            height: 200.0,
                             child: CircularProgressIndicator(
-                              valueColor: const AlwaysStoppedAnimation<Color>(
-                                  Colors.green),
+                              value: _progressValue,
+                              backgroundColor: Colors.grey,
                               strokeWidth: 2.0,
                             ),
                           );
