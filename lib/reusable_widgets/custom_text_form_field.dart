@@ -8,13 +8,13 @@ class CustomTextFormField extends StatefulWidget {
   final FormFieldSetter<String>? onSaved;
 
   const CustomTextFormField({
-    Key? key,
+    super.key,
     required this.labelText,
     required this.prefixIcon,
     this.isPassword = false,
     this.validator,
     this.onSaved,
-  }) : super(key: key);
+  });
 
   @override
   _CustomTextFormFieldState createState() => _CustomTextFormFieldState();

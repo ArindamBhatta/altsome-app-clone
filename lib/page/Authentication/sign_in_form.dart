@@ -4,6 +4,7 @@ import 'package:altsome_app/page/Authentication/sign_up_form.dart';
 import 'package:flutter/material.dart';
 import '../../reusable_widgets/custom_text_form_field.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignInForm extends StatefulWidget {
   @override
@@ -16,28 +17,37 @@ class _SignInFormState extends State<SignInForm> {
   String? _email;
   String? _password;
 
-  void submitForm() {
+  void submitForm() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       print('Form submitted!');
       print('Email: $_email, Password: $_password');
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => AltsomeApp(),
-        ),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Please enter valid email and password',
+
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _email!,
+          password: _password!,
+        );
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => AltsomeApp(),
+          ),
+        );
+      } catch (error) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              '${error.toString().replaceAll("[firebase_auth/invalid-credential]", "").trim()}',
               style: TextStyle(
-                color: Colors.red[400],
                 fontSize: 16,
-              )),
-          duration: Duration(seconds: 5),
-        ),
-      );
+              ),
+            ),
+            duration: Duration(seconds: 5),
+          ),
+        );
+      }
     }
   }
 
@@ -102,17 +112,19 @@ class _SignInFormState extends State<SignInForm> {
                         return 'Password must be at least 8 characters long';
                       } else if (value.contains(' ')) {
                         return 'Password cannot contain spaces';
-                      } else if (value.contains(RegExp(r'[A-Z]'))) {
+                      } else if (!value.contains(RegExp(r'[A-Z]'))) {
                         return 'Password must contain at least one uppercase letter';
-                      } else if (value.contains(RegExp(r'[0-9]'))) {
+                      } else if (!value.contains(RegExp(r'[0-9]'))) {
                         return 'Password must contain at least one number';
-                      } else if (value
+                      } else if (!value
                           .contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
                         return 'Password must contain at least one special character';
                       } else {
-                        _password = value;
                         return null;
                       }
+                    },
+                    onSaved: (value) {
+                      _password = value?.trim();
                     },
                   ),
                   TextButton(
@@ -124,6 +136,11 @@ class _SignInFormState extends State<SignInForm> {
                       onPressed: () {
                         showModalBottomSheet(
                           context: context,
+                          isScrollControlled: true,
+                          constraints: BoxConstraints(
+                            maxHeight:
+                                MediaQuery.of(context).size.height * 0.75,
+                          ),
                           builder: (context) => ResetPassword(),
                         );
                       }),
