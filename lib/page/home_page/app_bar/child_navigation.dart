@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HomePageNavigation extends StatelessWidget {
-  const HomePageNavigation({super.key});
+class ChildNavigation extends StatelessWidget {
+  const ChildNavigation({super.key});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,6 +19,7 @@ class HomePageNavigation extends StatelessWidget {
               'Highlights',
               style: TextStyle(
                 color: Colors.white,
+                fontSize: 12,
               ),
             ),
           ),
@@ -26,18 +27,21 @@ class HomePageNavigation extends StatelessWidget {
             'ORM',
             style: TextStyle(
               color: Colors.black,
+              fontSize: 12,
             ),
           ),
           const Text(
             'Listings',
             style: TextStyle(
               color: Colors.black,
+              fontSize: 12,
             ),
           ),
           const Text(
             'Unlocks',
             style: TextStyle(
               color: Colors.black,
+              fontSize: 12,
             ),
           ),
         ],

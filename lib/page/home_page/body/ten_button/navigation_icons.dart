@@ -1,4 +1,4 @@
-import 'package:altsome_app/page/home_page/home_page_body/top_data_in_page_view/Provider/specification_provider.dart';
+import 'package:altsome_app/page/home_page/body/top_data_in_page_view/Provider/specification_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'sectors_page/widgets/sectors_page.dart';

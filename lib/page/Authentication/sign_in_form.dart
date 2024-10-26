@@ -2,9 +2,10 @@ import 'package:altsome_app/main.dart';
 import 'package:altsome_app/page/Authentication/reset_password.dart';
 import 'package:altsome_app/page/Authentication/sign_up_form.dart';
 import 'package:flutter/material.dart';
-import '../../reusable_widgets/custom_text_form_field.dart';
-import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import '../reusable_widgets/custom_text_form_field.dart';
+import 'package:email_validator/email_validator.dart';
 
 class SignInForm extends StatefulWidget {
   @override
@@ -20,8 +21,6 @@ class _SignInFormState extends State<SignInForm> {
   void submitForm() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      print('Form submitted!');
-      print('Email: $_email, Password: $_password');
 
       try {
         await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -48,6 +47,42 @@ class _SignInFormState extends State<SignInForm> {
           ),
         );
       }
+    }
+  }
+
+  Future<void> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      if (googleUser == null) return; // If user cancels the Google sign-in
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      await FirebaseAuth.instance.signInWithCredential(credential);
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => AltsomeApp(),
+        ),
+      );
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Google sign-in failed: $error',
+            style: TextStyle(
+              fontSize: 16,
+            ),
+          ),
+          duration: Duration(seconds: 5),
+        ),
+      );
     }
   }
 
@@ -119,9 +154,8 @@ class _SignInFormState extends State<SignInForm> {
                       } else if (!value
                           .contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
                         return 'Password must contain at least one special character';
-                      } else {
-                        return null;
                       }
+                      return null;
                     },
                     onSaved: (value) {
                       _password = value?.trim();
@@ -155,11 +189,21 @@ class _SignInFormState extends State<SignInForm> {
                     ),
                   ),
                   SizedBox(height: 16),
+                  ElevatedButton.icon(
+                    icon: Icon(Icons.login),
+                    label: Text('Sign in with Google'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.black,
+                    ),
+                    onPressed: signInWithGoogle,
+                  ),
+                  SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        "Don't have account?",
+                        "Don't have an account?",
                       ),
                       const SizedBox(width: 8),
                       GestureDetector(

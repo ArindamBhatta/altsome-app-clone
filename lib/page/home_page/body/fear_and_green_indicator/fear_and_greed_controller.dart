@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:altsome_app/page/home_page/home_page_body/fear_and_green_indicator/heading_and_download_button.dart';
-import 'package:altsome_app/page/home_page/home_page_body/fear_and_green_indicator/static_image_indicator.dart';
+import 'package:altsome_app/page/home_page/body/fear_and_green_indicator/heading_and_download_button.dart';
+import 'package:altsome_app/page/home_page/body/fear_and_green_indicator/static_image_indicator.dart';
 import 'data_percentage.dart';
 import 'package:altsome_app/repo/repo.dart';
 import '../../../../model/model_one.dart';

@@ -1,5 +1,5 @@
 import 'package:altsome_app/page/Authentication/sign_in_form.dart';
-import 'package:altsome_app/page/home_page/home_page_body/top_data_in_page_view/Provider/specification_provider.dart';
+import 'package:altsome_app/page/home_page/body/top_data_in_page_view/Provider/specification_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
