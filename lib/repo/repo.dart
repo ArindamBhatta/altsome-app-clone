@@ -1,4 +1,4 @@
-import 'package:altsome_app/caching/caching.dart';
+import 'package:altsome_app/service/caching/caching.dart';
 import '../model/model_two.dart';
 import '../model/model_three.dart';
 import '../model/model_one.dart';

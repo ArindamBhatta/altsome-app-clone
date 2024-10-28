@@ -1,3 +1,4 @@
+import 'package:altsome_app/page/Authentication/sign_in_form.dart';
 import 'package:flutter/material.dart';
 
 import '../../crud_operation/expense_tracker_main_page.dart';
@@ -65,9 +66,40 @@ class ParentNavigation extends StatelessWidget {
                     color: Colors.white,
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        barrierDismissible:
+                            false, //* tapping outside is prevented
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Confirm Logout'),
+                            content:
+                                const Text('Are you sure you want to log out?'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                      builder: (context) => SignInForm(),
+                                    ),
+                                  );
+                                },
+                                child: const Text('Logout'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
                     icon: const Icon(
-                      Icons.logout,
+                      Icons.logout_sharp,
                     ),
                     color: Colors.white,
                   ),

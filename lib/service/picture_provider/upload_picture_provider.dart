@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
-class initialize extends ChangeNotifier {
+class UploadPictureProvider extends ChangeNotifier {
   //* initialize firebase storage
   final firebaseStorage = FirebaseStorage.instance;
 

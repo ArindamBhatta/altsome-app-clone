@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../service/storage/storage_service.dart';
+import '../../service/picture_provider/upload_picture_provider.dart';
 
 class PicturePage extends StatefulWidget {
   @override
@@ -16,12 +16,13 @@ class _PicturePageState extends State<PicturePage> {
 
   //* fetch images
   Future<void> fetchImages() async {
-    await Provider.of<initialize>(context, listen: false).fetchImages();
+    await Provider.of<UploadPictureProvider>(context, listen: false)
+        .fetchImages();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<initialize>(
+    return Consumer<UploadPictureProvider>(
       builder: (context, StorageService, child) {
         return Scaffold(
           floatingActionButton: newMethod(StorageService),
@@ -38,7 +39,7 @@ class _PicturePageState extends State<PicturePage> {
     );
   }
 
-  FloatingActionButton newMethod(initialize StorageService) {
+  FloatingActionButton newMethod(UploadPictureProvider StorageService) {
     return FloatingActionButton(
       onPressed: () => {StorageService.uploadImages()},
       child: const Icon(Icons.cloud_upload_outlined),

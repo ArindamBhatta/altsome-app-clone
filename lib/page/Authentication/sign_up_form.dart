@@ -1,10 +1,11 @@
-import 'package:altsome_app/main.dart';
 import 'package:altsome_app/page/Authentication/sign_in_form.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../reusable_widgets/custom_text_form_field.dart';
 import 'package:email_validator/email_validator.dart';
+
+import '../../altsome_app.dart';
+import '../reusable_widgets/custom_text_form_field.dart';
 
 class SignUpForm extends StatefulWidget {
   @override
